@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мой игровой экран</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #2c3e50;
+            font-family: Arial;
+            touch-action: manipulation;
+        }
+        
+        .screen {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #34495e;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .button {
+            display: block;
+            width: 90%;
+            margin: 15px auto;
+            padding: 25px;
+            font-size: 24px;
+            border: none;
+            border-radius: 15px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .button:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+        
+        .button:active {
+            background: #1c638e;
+            transform: scale(0.95);
+        }
+        
+        .red { background: #e74c3c; }
+        .red:hover { background: #c0392b; }
+        
+        .green { background: #2ecc71; }
+        .green:hover { background: #27ae60; }
+        
+        .yellow { background: #f39c12; }
+        .yellow:hover { background: #d35400; }
+        
+        .purple { background: #9b59b6; }
+        .purple:hover { background: #8e44ad; }
+        
+        .orange { background: #e67e22; }
+        .orange:hover { background: #d35400; }
+        
+        .pink { background: #e84393; }
+        .pink:hover { background: #fd79a8; }
+        
+        .blue { background: #0984e3; }
+        .blue:hover { background: #074b83; }
+        
+        .status {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        /* Стили для выбора игр */
+        #gamesMenu {
+            display: none;
+            text-align: center;
+        }
+        
+        .game-btn {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* Кнопка выхода в лобби */
+        .lobby-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 100;
+        }
+
+        /* Стили для игры Змейка */
+        #snakeGame {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        /* Стили для Кликера */
+        #clickerGame {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .clicker-btn {
+            width: 200px;
+            height: 200px;
+            font-size: 40px;
+            border: none;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            cursor: pointer;
+            margin: 20px;
+            transition: all 0.1s;
+        }
+        
+        .clicker-btn:active {
+            transform: scale(0.9);
+            background: #c0392b;
+        }
+        
+        .upgrade-btn {
+            display: block;
+            width: 80%;
+            margin: 5px auto;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Стили для 2048 */
+        #game2048 {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .grid-2048 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 400px;
+            margin: 0 auto;
+            background: #bbada0;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .tile {
+            width: 80px;
+            height: 80px;
+            background: #cdc1b4;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #776e65;
+            transition: all 0.2s;
+        }
+        
+        .tile-2 { background: #eee4da; }
+        .tile-4 { background: #ede0c8; }
+        .tile-8 { background: #f2b179; color: white; }
+        .tile-16 { background: #f59563; color: white; }
+        .tile-32 { background: #f67c5f; color: white; }
+        .tile-64 { background: #f65e3b; color: white; }
+        .tile-128 { background: #edcf72; color: white; font-size: 20px; }
+        .tile-256 { background: #edcc61; color: white; font-size: 20px; }
+        .tile-512 { background: #edc850; color: white; font-size: 20px; }
+        .tile-1024 { background: #edc53f; color: white; font-size: 16px; }
+        .tile-2048 { 
+            background: #edc22e; 
+            color: white; 
+            font-size: 16px;
+            box-shadow: 0 0 20px gold;
+        }
+
+        /* Стили для Brawl Stars */
+        #brawlGame {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .brawl-container {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(45deg, #1a237e, #4a148c);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .brawl-canvas {
+            display: block;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            width: 100%;
+            height: 100%;
+        }
+        
+        .brawl-controls {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        
+        .brawl-joystick {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            border: 2px solid white;
+            position: relative;
+            touch-action: none;
+        }
+        
+        .brawl-joystick-handle {
+            width: 40px;
+            height: 40px;
+            background: #3498db;
+            border-radius: 50%;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            border: 2px solid white;
+            transition: transform 0.1s;
+            touch-action: none;
+        }
+        
+        .brawl-attack-btn {
+            width: 70px;
+            height: 70px;
+            background: #e74c3c;
+            border-radius: 50%;
+            border: 2px solid white;
+            color: white;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        
+        .brawl-super-btn {
+            width: 60px;
+            height: 60px;
+            background: #9b59b6;
+            border-radius: 50%;
+            border: 2px solid white;
+            color: white;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 10px;
+            touch-action: manipulation;
+        }
+        
+        .brawl-hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 16px;
+            z-index: 10;
+        }
+        
+        .brawl-health-bar {
+            width: 150px;
+            height: 15px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+        
+        .brawl-health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c, #f1c40f);
+            border-radius: 8px;
+            transition: width 0.3s;
+        }
+        
+        .brawler-select-menu {
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 20;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .brawlers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .brawler-card {
+            width: 120px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .brawler-card:hover {
+            transform: scale(1.05);
+            border-color: #f1c40f;
+        }
+        
+        .brawler-card.selected {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.2);
+        }
+        
+        .brawler-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            border: 2px solid #f1c40f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .brawler-name {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .brawler-role {
+            color: #bdc3c7;
+            font-size: 10px;
+        }
+
+        /* Стили для Flappy Bird */
+        #flappyGame {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        /* Стили для Тетриса */
+        #tetrisGame {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .tetris-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 2px;
+            width: 300px;
+            margin: 0 auto;
+            background: #111;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .tetris-cell {
+            width: 25px;
+            height: 25px;
+            background: #333;
+            border-radius: 2px;
+        }
+        
+        .tetris-I { background: #00f0f0; }
+        .tetris-O { background: #f0f000; }
+        .tetris-T { background: #a000f0; }
+        .tetris-S { background: #00f000; }
+        .tetris-Z { background: #f00000; }
+        .tetris-J { background: #0000f0; }
+        .tetris-L { background: #f0a000; }
+
+        /* Общие стили для игр */
+        .gameCanvas {
+            border: 2px solid white;
+            background: #1a252f;
+            margin-bottom: 20px;
+        }
+        
+        .gameInfo {
+            color: white;
+            font-size: 20px;
+            margin: 10px;
+        }
+        
+        .backButton {
+            background: #e74c3c;
+            margin-top: 10px;
+        }
+
+        /* Стили для стрелок управления */
+        .controls {
+            display: grid;
+            grid-template-areas: 
+                ". up ."
+                "left . right"
+                ". down .";
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .control-btn {
+            width: 70px;
+            height: 70px;
+            font-size: 30px;
+            border: none;
+            border-radius: 15px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .control-btn:active {
+            background: #2980b9;
+            transform: scale(0.9);
+        }
+        
+        .up { grid-area: up; }
+        .left { grid-area: left; }
+        .right { grid-area: right; }
+        .down { grid-area: down; }
+    </style>
+</head>
+<body>
+    <div class="screen">
+        <div class="status" id="status">Готов к играм!</div>
+        
+        <button class="button green" onclick="showGamesMenu()">🎮 ВЫБРАТЬ ИГРУ</button>
+        <button class="button" onclick="pressButton(1)">🚀 СТАРТ</button>
+        <button class="button red" onclick="pressButton(3)">⛔ ВЫКЛЮЧИТЬ</button>
+        <button class="button" onclick="pressButton(4)">⚙️ НАСТРОЙКИ</button>
+        <button class="button" onclick="pressButton(5)">📊 СТАТУС</button>
+        
+        <!-- Меню выбора игр -->
+        <div id="gamesMenu">
+            <div class="status">Выберите игру:</div>
+            <button class="game-btn green" onclick="startSnakeGame()">🐍 ЗМЕЙКА</button>
+            <button class="game-btn yellow" onclick="startClickerGame()">🖱️ КЛИКЕР</button>
+            <button class="game-btn purple" onclick="startGame2048()">🔢 2048</button>
+            <button class="game-btn blue" onclick="startBrawlGame()">⚔️ BRAWL STARS</button>
+            <button class="game-btn orange" onclick="startFlappyBird()">🐦 FLAPPY BIRD</button>
+            <button class="game-btn pink" onclick="startTetris()">🧊 ТЕТРИС</button>
+            <button class="button backButton" onclick="backToMainMenu()">← Назад</button>
+        </div>
+        
+        <!-- Игра ЗМЕЙКА -->
+        <div id="snakeGame">
+            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
+            <canvas id="snakeCanvas" class="gameCanvas" width="400" height="400"></canvas>
+            <div class="gameInfo">
+                Очки: <span id="snakeScore">0</span> | 
+                Длина: <span id="snakeLength">1</span>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn up" onclick="changeSnakeDirection('up')">↑</button>
+                <button class="control-btn left" onclick="changeSnakeDirection('left')">←</button>
+                <button class="control-btn right" onclick="changeSnakeDirection('right')">→</button>
+                <button class="control-btn down" onclick="changeSnakeDirection('down')">↓</button>
+            </div>
+        </div>
+        
+        <!-- Игра КЛИКЕР -->
+        <div id="clickerGame">
+            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
+            <div class="status">КЛИКЕР ИГРА</div>
+            <button class="clicker-btn" onclick="clickCoin()">🪙</button>
+            <div class="gameInfo">
+                Монеты: <span id="coins">0</span><br>
+                За клик: <span id="clickPower">1</span><br>
+                Автоклик: <span id="autoClick">0</span>/сек
+            </div>
+            
+            <button class="upgrade-btn" onclick="buyUpgrade('click')">Улучшить клик (+1) - 10 монет</button>
+            <button class="upgrade-btn" onclick="buyUpgrade('auto')">Автоклик (+1/сек) - 50 монет</button>
+            <button class="upgrade-btn" onclick="buyUpgrade('mega')">МЕГА КЛИК (x2) - 100 монет</button>
+        </div>
+        
+        <!-- Игра 2048 -->
+        <div id="game2048">
+            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
+            <div class="status">ИГРА 2048</div>
+            <div class="gameInfo">Очки: <span id="score2048">0</span></div>
+            <div class="grid-2048" id="grid2048"></div>
+            
+            <div class="controls">
+                <button class="control-btn up" onclick="move2048('up')">↑</button>
+                <button class="control-btn left" onclick="move2048('left')">←</button>
+                <button class="control-btn right" onclick="move2048('right')">→</button>
+                <button class="control-btn down" onclick="move2048('down')">↓</button>
+            </div>
+        </div>
+
+        <!-- Игра BRAWL STARS -->
+        <div id="brawlGame">
+            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
+            <div class="status">BRAWL STARS</div>
+            <div class="brawl-container">
+                <canvas id="brawlCanvas" width="800" height="600"></canvas>
+                
+                <!-- HUD -->
+                <div class="brawl-hud">
+                    <div class="brawl-health-bar">
+                        <div class="brawl-health-fill" id="brawlHealthFill" style="width: 100%"></div>
+                    </div>
+                    <div>УБИЙСТВ: <span id="brawlKills">0</span></div>
+                    <div>ПАТРОНЫ: <span id="brawlAmmo">3</span>/3</div>
+                </div>
+                
+                <!-- Управление -->
+                <div class="brawl-controls">
+                    <div class="brawl-joystick" id="joystick">
+                        <div class="brawl-joystick-handle" id="joystickHandle"></div>
+                    </div>
+                    <div style="display: flex;">
+                        <div class="brawl-attack-btn" id="attackBtn">АТАКА</div>
+                        <div class="brawl-super-btn" id="superBtn">УЛЬТА</div>
+                    </div>
+                </div>
+                
+                <!-- Меню выбора бойца -->
+                <div class="brawler-select-menu" id="brawlerSelectMenu">
+                    <div style="color: #f1c40f; font-size: 24px; margin-bottom: 20px;">ВЫБЕРИ БОЙЦА</div>
+                    <div class="brawlers-grid" id="brawlersGrid"></div>
+                    <button class="button" onclick="startBrawlBattle()" style="margin-top: 20px; background: #27ae60;">🎮 НАЧАТЬ БОЙ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Игра FLAPPY BIRD -->
+        <div id="flappyGame">
+            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
+            <canvas id="flappyCanvas" class="gameCanvas" width="320" height="480"></canvas>
+            <div class="gameInfo">
+                Очки: <span id="flappyScore">0</span> |
+                Рекорд: <span id="flappyBest">0</span>
+            </div>
+            <button class="button" onclick="flappyJump()">🔄 ПРЫГАТЬ</button>
+        </div>
+
+        <!-- Игра ТЕТРИС -->
+        <div id="tetrisGame">
+            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
+            <div class="status">ТЕТРИС</div>
+            <div class="gameInfo">
+                Очки: <span id="tetrisScore">0</span> |
+                Уровень: <span id="tetrisLevel">1</span> |
+                Линии: <span id="tetrisLines">0</span>
+            </div>
+            <div class="tetris-grid" id="tetrisGrid"></div>
+            
+            <div class="controls">
+                <button class="control-btn left" onclick="moveTetris('left')">←</button>
+                <button class="control-btn up" onclick="rotateTetris()">↻</button>
+                <button class="control-btn right" onclick="moveTetris('right')">→</button>
+                <button class="control-btn down" onclick="moveTetris('down')">↓</button>
+            </div>
+        </div>
+    </div>
