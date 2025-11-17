@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Мой игровой экран</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         body {
             margin: 0;
@@ -9,6 +10,10 @@
             background: #2c3e50;
             font-family: Arial;
             touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            overflow-x: hidden;
         }
         
         .screen {
@@ -33,6 +38,9 @@
             color: white;
             cursor: pointer;
             transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
         
         .button:hover {
@@ -93,21 +101,9 @@
             color: white;
             cursor: pointer;
             transition: all 0.3s;
-        }
-
-        /* Кнопка выхода в лобби */
-        .lobby-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            z-index: 100;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
 
         /* Стили для игры Змейка */
@@ -115,7 +111,6 @@
             display: none;
             text-align: center;
             margin-top: 20px;
-            position: relative;
         }
         
         /* Стили для Кликера */
@@ -123,7 +118,6 @@
             display: none;
             text-align: center;
             margin-top: 20px;
-            position: relative;
         }
         
         .clicker-btn {
@@ -137,6 +131,9 @@
             cursor: pointer;
             margin: 20px;
             transition: all 0.1s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
         
         .clicker-btn:active {
@@ -155,6 +152,9 @@
             background: #3498db;
             color: white;
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
 
         /* Стили для 2048 */
@@ -162,7 +162,6 @@
             display: none;
             text-align: center;
             margin-top: 20px;
-            position: relative;
         }
         
         .grid-2048 {
@@ -212,7 +211,6 @@
             display: none;
             text-align: center;
             margin-top: 20px;
-            position: relative;
         }
         
         .brawl-container {
@@ -227,8 +225,6 @@
         .brawl-canvas {
             display: block;
             background: linear-gradient(45deg, #27ae60, #2ecc71);
-            width: 100%;
-            height: 100%;
         }
         
         .brawl-controls {
@@ -248,7 +244,9 @@
             border-radius: 50%;
             border: 2px solid white;
             position: relative;
+            -webkit-tap-highlight-color: transparent;
             touch-action: none;
+            user-select: none;
         }
         
         .brawl-joystick-handle {
@@ -276,7 +274,9 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            user-select: none;
         }
         
         .brawl-super-btn {
@@ -292,7 +292,9 @@
             justify-content: center;
             cursor: pointer;
             margin-left: 10px;
+            -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            user-select: none;
         }
         
         .brawl-hud {
@@ -321,13 +323,13 @@
         }
         
         .brawler-select-menu {
-            display: flex;
+            display: none;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.8);
             z-index: 20;
             flex-direction: column;
             align-items: center;
@@ -353,6 +355,9 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
         
         .brawler-card:hover {
@@ -395,7 +400,6 @@
             display: none;
             text-align: center;
             margin-top: 20px;
-            position: relative;
         }
         
         /* Стили для Тетриса */
@@ -403,7 +407,6 @@
             display: none;
             text-align: center;
             margin-top: 20px;
-            position: relative;
         }
         
         .tetris-grid {
@@ -475,6 +478,9 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
         
         .control-btn:active {
@@ -486,33 +492,124 @@
         .left { grid-area: left; }
         .right { grid-area: right; }
         .down { grid-area: down; }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .button, .game-btn {
+                padding: 20px;
+                font-size: 18px;
+                margin: 10px auto;
+            }
+            
+            .control-btn {
+                width: 80px;
+                height: 80px;
+                font-size: 24px;
+            }
+            
+            .brawl-joystick {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .brawl-joystick-handle {
+                width: 50px;
+                height: 50px;
+                top: 35px;
+                left: 35px;
+            }
+            
+            .brawl-attack-btn {
+                width: 90px;
+                height: 90px;
+                font-size: 14px;
+            }
+            
+            .brawl-super-btn {
+                width: 70px;
+                height: 70px;
+                font-size: 12px;
+            }
+            
+            .clicker-btn {
+                width: 180px;
+                height: 180px;
+                font-size: 36px;
+            }
+            
+            .grid-2048 {
+                width: 350px;
+                gap: 8px;
+                padding: 8px;
+            }
+            
+            .tile {
+                width: 70px;
+                height: 70px;
+                font-size: 20px;
+            }
+            
+            .brawler-card {
+                width: 100px;
+                height: 130px;
+            }
+            
+            .brawler-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-2048 {
+                width: 300px;
+            }
+            
+            .tile {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
+            
+            .brawl-container {
+                height: 500px;
+            }
+            
+            .brawl-controls {
+                padding: 0 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="screen">
         <div class="status" id="status">Готов к играм!</div>
         
-        <button class="button green" onclick="showGamesMenu()">🎮 ВЫБРАТЬ ИГРУ</button>
-        <button class="button" onclick="pressButton(1)">🚀 СТАРТ</button>
-        <button class="button red" onclick="pressButton(3)">⛔ ВЫКЛЮЧИТЬ</button>
-        <button class="button" onclick="pressButton(4)">⚙️ НАСТРОЙКИ</button>
-        <button class="button" onclick="pressButton(5)">📊 СТАТУС</button>
+        <button class="button green" data-action="showGamesMenu">🎮 ВЫБРАТЬ ИГРУ</button>
+        <button class="button" data-action="pressButton" data-value="1">🚀 СТАРТ</button>
+        <button class="button red" data-action="pressButton" data-value="3">⛔ ВЫКЛЮЧИТЬ</button>
+        <button class="button" data-action="pressButton" data-value="4">⚙️ НАСТРОЙКИ</button>
+        <button class="button" data-action="pressButton" data-value="5">📊 СТАТУС</button>
         
         <!-- Меню выбора игр -->
         <div id="gamesMenu">
             <div class="status">Выберите игру:</div>
-            <button class="game-btn green" onclick="startSnakeGame()">🐍 ЗМЕЙКА</button>
-            <button class="game-btn yellow" onclick="startClickerGame()">🖱️ КЛИКЕР</button>
-            <button class="game-btn purple" onclick="startGame2048()">🔢 2048</button>
-            <button class="game-btn blue" onclick="startBrawlGame()">⚔️ BRAWL STARS</button>
-            <button class="game-btn orange" onclick="startFlappyBird()">🐦 FLAPPY BIRD</button>
-            <button class="game-btn pink" onclick="startTetris()">🧊 ТЕТРИС</button>
-            <button class="button backButton" onclick="backToMainMenu()">← Назад</button>
+            <button class="game-btn green" data-action="startSnakeGame">🐍 ЗМЕЙКА</button>
+            <button class="game-btn yellow" data-action="startClickerGame">🖱️ КЛИКЕР</button>
+            <button class="game-btn purple" data-action="startGame2048">🔢 2048</button>
+            <button class="game-btn blue" data-action="startBrawlGame">⚔️ BRAWL STARS</button>
+            <button class="game-btn orange" data-action="startFlappyBird">🐦 FLAPPY BIRD</button>
+            <button class="game-btn pink" data-action="startTetris">🧊 ТЕТРИС</button>
+            <button class="button backButton" data-action="backToMainMenu">← Назад</button>
         </div>
         
         <!-- Игра ЗМЕЙКА -->
         <div id="snakeGame">
-            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
             <canvas id="snakeCanvas" class="gameCanvas" width="400" height="400"></canvas>
             <div class="gameInfo">
                 Очки: <span id="snakeScore">0</span> | 
@@ -520,50 +617,53 @@
             </div>
             
             <div class="controls">
-                <button class="control-btn up" onclick="changeSnakeDirection('up')">↑</button>
-                <button class="control-btn left" onclick="changeSnakeDirection('left')">←</button>
-                <button class="control-btn right" onclick="changeSnakeDirection('right')">→</button>
-                <button class="control-btn down" onclick="changeSnakeDirection('down')">↓</button>
+                <button class="control-btn up" data-action="changeSnakeDirection" data-value="up">↑</button>
+                <button class="control-btn left" data-action="changeSnakeDirection" data-value="left">←</button>
+                <button class="control-btn right" data-action="changeSnakeDirection" data-value="right">→</button>
+                <button class="control-btn down" data-action="changeSnakeDirection" data-value="down">↓</button>
             </div>
+            
+            <button class="button backButton" data-action="backToGamesMenu">← Назад к играм</button>
         </div>
         
         <!-- Игра КЛИКЕР -->
         <div id="clickerGame">
-            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
             <div class="status">КЛИКЕР ИГРА</div>
-            <button class="clicker-btn" onclick="clickCoin()">🪙</button>
+            <button class="clicker-btn" data-action="clickCoin">🪙</button>
             <div class="gameInfo">
                 Монеты: <span id="coins">0</span><br>
                 За клик: <span id="clickPower">1</span><br>
                 Автоклик: <span id="autoClick">0</span>/сек
             </div>
             
-            <button class="upgrade-btn" onclick="buyUpgrade('click')">Улучшить клик (+1) - 10 монет</button>
-            <button class="upgrade-btn" onclick="buyUpgrade('auto')">Автоклик (+1/сек) - 50 монет</button>
-            <button class="upgrade-btn" onclick="buyUpgrade('mega')">МЕГА КЛИК (x2) - 100 монет</button>
+            <button class="upgrade-btn" data-action="buyUpgrade" data-value="click">Улучшить клик (+1) - 10 монет</button>
+            <button class="upgrade-btn" data-action="buyUpgrade" data-value="auto">Автоклик (+1/сек) - 50 монет</button>
+            <button class="upgrade-btn" data-action="buyUpgrade" data-value="mega">МЕГА КЛИК (x2) - 100 монет</button>
+            
+            <button class="button backButton" data-action="backToGamesMenu">← Назад к играм</button>
         </div>
         
         <!-- Игра 2048 -->
         <div id="game2048">
-            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
             <div class="status">ИГРА 2048</div>
             <div class="gameInfo">Очки: <span id="score2048">0</span></div>
             <div class="grid-2048" id="grid2048"></div>
             
             <div class="controls">
-                <button class="control-btn up" onclick="move2048('up')">↑</button>
-                <button class="control-btn left" onclick="move2048('left')">←</button>
-                <button class="control-btn right" onclick="move2048('right')">→</button>
-                <button class="control-btn down" onclick="move2048('down')">↓</button>
+                <button class="control-btn up" data-action="move2048" data-value="up">↑</button>
+                <button class="control-btn left" data-action="move2048" data-value="left">←</button>
+                <button class="control-btn right" data-action="move2048" data-value="right">→</button>
+                <button class="control-btn down" data-action="move2048" data-value="down">↓</button>
             </div>
+            
+            <button class="button backButton" data-action="backToGamesMenu">← Назад к играм</button>
         </div>
 
         <!-- Игра BRAWL STARS -->
         <div id="brawlGame">
-            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
             <div class="status">BRAWL STARS</div>
             <div class="brawl-container">
-                <canvas id="brawlCanvas" width="800" height="600"></canvas>
+                <canvas id="brawlCanvas" class="brawl-canvas" width="800" height="600"></canvas>
                 
                 <!-- HUD -->
                 <div class="brawl-hud">
@@ -589,25 +689,26 @@
                 <div class="brawler-select-menu" id="brawlerSelectMenu">
                     <div style="color: #f1c40f; font-size: 24px; margin-bottom: 20px;">ВЫБЕРИ БОЙЦА</div>
                     <div class="brawlers-grid" id="brawlersGrid"></div>
-                    <button class="button" onclick="startBrawlBattle()" style="margin-top: 20px; background: #27ae60;">🎮 НАЧАТЬ БОЙ</button>
+                    <button class="button" data-action="startBrawlBattle" style="margin-top: 20px;">✅ НАЧАТЬ БОЙ</button>
                 </div>
             </div>
+            
+            <button class="button backButton" data-action="backToGamesMenu">← Назад к играм</button>
         </div>
 
         <!-- Игра FLAPPY BIRD -->
         <div id="flappyGame">
-            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
             <canvas id="flappyCanvas" class="gameCanvas" width="320" height="480"></canvas>
             <div class="gameInfo">
                 Очки: <span id="flappyScore">0</span> |
                 Рекорд: <span id="flappyBest">0</span>
             </div>
-            <button class="button" onclick="flappyJump()">🔄 ПРЫГАТЬ</button>
+            <button class="button" data-action="flappyJump">🔄 ПРЫГАТЬ</button>
+            <button class="button backButton" data-action="backToGamesMenu">← Назад к играм</button>
         </div>
 
         <!-- Игра ТЕТРИС -->
         <div id="tetrisGame">
-            <button class="lobby-btn" onclick="backToGamesMenu()">🚪 В ЛОББИ</button>
             <div class="status">ТЕТРИС</div>
             <div class="gameInfo">
                 Очки: <span id="tetrisScore">0</span> |
@@ -617,12 +718,854 @@
             <div class="tetris-grid" id="tetrisGrid"></div>
             
             <div class="controls">
-                <button class="control-btn left" onclick="moveTetris('left')">←</button>
-                <button class="control-btn up" onclick="rotateTetris()">↻</button>
-                <button class="control-btn right" onclick="moveTetris('right')">→</button>
-                <button class="control-btn down" onclick="moveTetris('down')">↓</button>
+                <button class="control-btn left" data-action="moveTetris" data-value="left">←</button>
+                <button class="control-btn up" data-action="rotateTetris">↻</button>
+                <button class="control-btn right" data-action="moveTetris" data-value="right">→</button>
+                <button class="control-btn down" data-action="moveTetris" data-value="down">↓</button>
             </div>
+            
+            <button class="button backButton" data-action="backToGamesMenu">← Назад к играм</button>
         </div>
     </div>
 
-    
+    <script>
+        // ==================== ИНИЦИАЛИЗАЦИЯ МОБИЛЬНОГО УПРАВЛЕНИЯ ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            initMobileControls();
+            preventDefaultTouch();
+        });
+
+        function initMobileControls() {
+            // Обработка всех кнопок
+            const buttons = document.querySelectorAll('button');
+            
+            buttons.forEach(button => {
+                // Обработка клика
+                button.addEventListener('click', handleButtonClick);
+                
+                // Обработка touch событий для мобильных
+                button.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(0.95)';
+                    this.style.opacity = '0.8';
+                }, { passive: false });
+                
+                button.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(1)';
+                    this.style.opacity = '1';
+                    handleButtonClick.call(this, e);
+                }, { passive: false });
+                
+                button.addEventListener('touchcancel', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(1)';
+                    this.style.opacity = '1';
+                }, { passive: false });
+            });
+
+            // Инициализация джойстика для Brawl Stars
+            initBrawlJoystick();
+            initBrawlAttackButtons();
+        }
+
+        function preventDefaultTouch() {
+            // Предотвращаем стандартное поведение касания
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.tagName === 'BUTTON' || 
+                    e.target.classList.contains('brawl-joystick') ||
+                    e.target.classList.contains('brawl-attack-btn') ||
+                    e.target.classList.contains('brawl-super-btn')) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchmove', function(e) {
+                if (e.target.classList.contains('brawl-joystick')) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        }
+
+        function handleButtonClick(e) {
+            const action = this.getAttribute('data-action');
+            const value = this.getAttribute('data-value');
+            
+            switch(action) {
+                case 'showGamesMenu':
+                    showGamesMenu();
+                    break;
+                case 'pressButton':
+                    pressButton(parseInt(value));
+                    break;
+                case 'backToMainMenu':
+                    backToMainMenu();
+                    break;
+                case 'backToGamesMenu':
+                    backToGamesMenu();
+                    break;
+                case 'startSnakeGame':
+                    startSnakeGame();
+                    break;
+                case 'startClickerGame':
+                    startClickerGame();
+                    break;
+                case 'startGame2048':
+                    startGame2048();
+                    break;
+                case 'startBrawlGame':
+                    startBrawlGame();
+                    break;
+                case 'startFlappyBird':
+                    startFlappyBird();
+                    break;
+                case 'startTetris':
+                    startTetris();
+                    break;
+                case 'changeSnakeDirection':
+                    changeSnakeDirection(value);
+                    break;
+                case 'clickCoin':
+                    clickCoin();
+                    break;
+                case 'buyUpgrade':
+                    buyUpgrade(value);
+                    break;
+                case 'move2048':
+                    move2048(value);
+                    break;
+                case 'flappyJump':
+                    flappyJump();
+                    break;
+                case 'moveTetris':
+                    moveTetris(value);
+                    break;
+                case 'rotateTetris':
+                    rotateTetris();
+                    break;
+                case 'startBrawlBattle':
+                    startBrawlBattle();
+                    break;
+            }
+        }
+
+        // ==================== ОБЩИЕ ФУНКЦИИ ====================
+        function pressButton(btnNumber) {
+            const messages = [
+                "Старт запущен!",
+                "Выбор игры...",
+                "Система выключена! ⛔",
+                "Открыты настройки",
+                "Статус: Всё отлично!"
+            ];
+            
+            document.getElementById('status').textContent = messages[btnNumber - 1];
+            
+            const status = document.getElementById('status');
+            status.style.background = '#e67e22';
+            setTimeout(() => {
+                status.style.background = 'rgba(255,255,255,0.1)';
+            }, 300);
+        }
+        
+        function showGamesMenu() {
+            document.getElementById('status').style.display = 'none';
+            document.querySelectorAll('.button').forEach(btn => btn.style.display = 'none');
+            document.getElementById('gamesMenu').style.display = 'block';
+        }
+        
+        function backToMainMenu() {
+            hideAllGames();
+            document.getElementById('status').style.display = 'block';
+            document.querySelectorAll('.button').forEach(btn => btn.style.display = 'block');
+            document.getElementById('status').textContent = 'Возврат в меню!';
+        }
+        
+        function backToGamesMenu() {
+            hideAllGames();
+            document.getElementById('gamesMenu').style.display = 'block';
+        }
+        
+        function hideAllGames() {
+            document.getElementById('gamesMenu').style.display = 'none';
+            document.getElementById('snakeGame').style.display = 'none';
+            document.getElementById('clickerGame').style.display = 'none';
+            document.getElementById('game2048').style.display = 'none';
+            document.getElementById('brawlGame').style.display = 'none';
+            document.getElementById('flappyGame').style.display = 'none';
+            document.getElementById('tetrisGame').style.display = 'none';
+            
+            // Останавливаем все игровые интервалы
+            if (snakeInterval) clearInterval(snakeInterval);
+            if (flappyInterval) clearInterval(flappyInterval);
+            if (tetrisInterval) clearInterval(tetrisInterval);
+            if (brawlInterval) clearInterval(brawlInterval);
+        }
+
+        // ==================== ИГРА ЗМЕЙКА ====================
+        let snakeInterval;
+        
+        function startSnakeGame() {
+            hideAllGames();
+            document.getElementById('snakeGame').style.display = 'block';
+            initSnakeGame();
+        }
+        
+        function initSnakeGame() {
+            const canvas = document.getElementById('snakeCanvas');
+            const ctx = canvas.getContext('2d');
+            const gridSize = 20;
+            let snake = [{x: 8, y: 8}];
+            let food = {x: 5, y: 5};
+            let dx = 1, dy = 0;
+            let score = 0;
+            
+            document.getElementById('snakeScore').textContent = score;
+            document.getElementById('snakeLength').textContent = snake.length;
+            
+            function gameLoop() {
+                const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+                
+                // Проверка столкновения со стенами
+                if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20) {
+                    gameOver();
+                    return;
+                }
+                
+                // Проверка столкновения с собой
+                if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+                    gameOver();
+                    return;
+                }
+                
+                snake.unshift(head);
+                
+                // Проверка поедания еды
+                if (head.x === food.x && head.y === food.y) {
+                    score += 10;
+                    document.getElementById('snakeScore').textContent = score;
+                    document.getElementById('snakeLength').textContent = snake.length;
+                    generateFood();
+                } else {
+                    snake.pop();
+                }
+                
+                // Отрисовка
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Еда
+                ctx.fillStyle = '#e74c3c';
+                ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+                
+                // Змейка
+                ctx.fillStyle = '#2ecc71';
+                snake.forEach(segment => {
+                    ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+                });
+            }
+            
+            function generateFood() {
+                do {
+                    food = {
+                        x: Math.floor(Math.random() * 20),
+                        y: Math.floor(Math.random() * 20)
+                    };
+                } while (snake.some(segment => segment.x === food.x && segment.y === food.y));
+            }
+            
+            function gameOver() {
+                clearInterval(snakeInterval);
+                alert(`Змейка: Игра окончена! Счёт: ${score}`);
+                backToGamesMenu();
+            }
+            
+            window.changeSnakeDirection = function(direction) {
+                if (direction === 'left' && dx !== 1) { dx = -1; dy = 0; }
+                if (direction === 'up' && dy !== 1) { dx = 0; dy = -1; }
+                if (direction === 'right' && dx !== -1) { dx = 1; dy = 0; }
+                if (direction === 'down' && dy !== -1) { dx = 0; dy = 1; }
+            };
+            
+            generateFood();
+            if (snakeInterval) clearInterval(snakeInterval);
+            snakeInterval = setInterval(gameLoop, 200);
+        }
+
+        // ==================== ИГРА КЛИКЕР ====================
+        let coins = 0;
+        let clickPower = 1;
+        let autoClicker = 0;
+        
+        function startClickerGame() {
+            hideAllGames();
+            document.getElementById('clickerGame').style.display = 'block';
+            coins = 0;
+            clickPower = 1;
+            autoClicker = 0;
+            updateClickerUI();
+        }
+        
+        function clickCoin() {
+            coins += clickPower;
+            updateClickerUI();
+        }
+        
+        function buyUpgrade(type) {
+            if (type === 'click' && coins >= 10) {
+                coins -= 10;
+                clickPower += 1;
+            } else if (type === 'auto' && coins >= 50) {
+                coins -= 50;
+                autoClicker += 1;
+            } else if (type === 'mega' && coins >= 100) {
+                coins -= 100;
+                clickPower *= 2;
+            }
+            updateClickerUI();
+        }
+        
+        function updateClickerUI() {
+            document.getElementById('coins').textContent = coins;
+            document.getElementById('clickPower').textContent = clickPower;
+            document.getElementById('autoClick').textContent = autoClicker;
+        }
+        
+        // Автокликер
+        setInterval(() => {
+            if (autoClicker > 0 && document.getElementById('clickerGame').style.display === 'block') {
+                coins += autoClicker;
+                updateClickerUI();
+            }
+        }, 1000);
+
+        // ==================== ИГРА 2048 ====================
+        let grid2048 = [];
+        let score2048 = 0;
+        
+        function startGame2048() {
+            hideAllGames();
+            document.getElementById('game2048').style.display = 'block';
+            init2048();
+        }
+        
+        function init2048() {
+            grid2048 = [
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+            ];
+            score2048 = 0;
+            addRandomTile();
+            addRandomTile();
+            update2048UI();
+        }
+        
+        function addRandomTile() {
+            const emptyCells = [];
+            for (let y = 0; y < 4; y++) {
+                for (let x = 0; x < 4; x++) {
+                    if (grid2048[y][x] === 0) emptyCells.push({x, y});
+                }
+            }
+            
+            if (emptyCells.length > 0) {
+                const cell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                grid2048[cell.y][cell.x] = Math.random() < 0.9 ? 2 : 4;
+            }
+        }
+        
+        function update2048UI() {
+            const gridElement = document.getElementById('grid2048');
+            gridElement.innerHTML = '';
+            
+            for (let y = 0; y < 4; y++) {
+                for (let x = 0; x < 4; x++) {
+                    const tile = document.createElement('div');
+                    const value = grid2048[y][x];
+                    tile.className = `tile tile-${value}`;
+                    tile.textContent = value || '';
+                    gridElement.appendChild(tile);
+                }
+            }
+            
+            document.getElementById('score2048').textContent = score2048;
+        }
+        
+        function move2048(direction) {
+            let moved = false;
+            
+            // Простая реализация движения влево
+            for (let y = 0; y < 4; y++) {
+                let row = grid2048[y].filter(cell => cell !== 0);
+                for (let i = 0; i < row.length - 1; i++) {
+                    if (row[i] === row[i + 1]) {
+                        row[i] *= 2;
+                        score2048 += row[i];
+                        row.splice(i + 1, 1);
+                        moved = true;
+                    }
+                }
+                while (row.length < 4) row.push(0);
+                grid2048[y] = row;
+            }
+            
+            if (moved) {
+                addRandomTile();
+                update2048UI();
+            }
+        }
+
+        // ==================== BRAWL STARS ====================
+        const brawlers = [
+            { 
+                id: 1, 
+                name: "ШЕЛЛИ", 
+                role: "БЛИЖНИЙ БОЙ", 
+                health: 5000, 
+                damage: 400, 
+                super: "Супер-атака", 
+                icon: "💥", 
+                color: "#e74c3c",
+                speed: 4,
+                size: 40
+            },
+            { 
+                id: 2, 
+                name: "КОЛТ", 
+                role: "СТРЕЛОК", 
+                health: 3800, 
+                damage: 320, 
+                super: "Быстрые выстрелы", 
+                icon: "🔫", 
+                color: "#3498db",
+                speed: 5,
+                size: 35
+            },
+            { 
+                id: 3, 
+                name: "БЫЛЛЬ", 
+                role: "ТАНК", 
+                health: 7000, 
+                damage: 280, 
+                super: "Таран", 
+                icon: "🐂", 
+                color: "#e67e22",
+                speed: 3,
+                size: 50
+            }
+        ];
+
+        let brawlInterval = null;
+        let currentBrawler = null;
+        let selectedBrawlerId = 1;
+        let joystickActive = false;
+
+        function startBrawlGame() {
+            hideAllGames();
+            document.getElementById('brawlGame').style.display = 'block';
+            document.getElementById('brawlerSelectMenu').style.display = 'flex';
+            initBrawlStars();
+        }
+
+        function initBrawlStars() {
+            createBrawlerCards();
+        }
+
+        function createBrawlerCards() {
+            const grid = document.getElementById('brawlersGrid');
+            grid.innerHTML = '';
+            
+            brawlers.forEach(brawler => {
+                const card = document.createElement('div');
+                card.className = 'brawler-card';
+                card.setAttribute('data-action', 'selectBrawler');
+                card.setAttribute('data-value', brawler.id);
+                
+                card.innerHTML = `
+                    <div class="brawler-icon" style="background: linear-gradient(45deg, ${brawler.color}, #2c3e50)">
+                        ${brawler.icon}
+                    </div>
+                    <div class="brawler-name">${brawler.name}</div>
+                    <div class="brawler-role">${brawler.role}</div>
+                    <div style="color: #f1c40f; font-size: 10px; margin-top: 5px;">
+                        ❤️${brawler.health} ⚔️${brawler.damage}
+                    </div>
+                `;
+                
+                // Добавляем обработчики для карточек бойцов
+                card.addEventListener('click', function() {
+                    selectBrawler(brawler.id);
+                });
+                
+                card.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(0.95)';
+                }, { passive: false });
+                
+                card.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(1)';
+                    selectBrawler(brawler.id);
+                }, { passive: false });
+                
+                grid.appendChild(card);
+            });
+            
+            selectBrawler(1);
+        }
+
+        function selectBrawler(brawlerId) {
+            selectedBrawlerId = brawlerId;
+            const cards = document.querySelectorAll('.brawler-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            cards[brawlerId - 1].classList.add('selected');
+        }
+
+        function startBrawlBattle() {
+            document.getElementById('brawlerSelectMenu').style.display = 'none';
+            currentBrawler = brawlers.find(b => b.id === selectedBrawlerId);
+            initBrawlBattle();
+        }
+
+        function initBrawlJoystick() {
+            const joystick = document.getElementById('joystick');
+            const handle = document.getElementById('joystickHandle');
+            
+            if (!joystick) return;
+
+            let touchId = null;
+            
+            joystick.addEventListener('touchstart', (e) => {
+                if (touchId === null) {
+                    touchId = e.changedTouches[0].identifier;
+                    joystickActive = true;
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!joystickActive) return;
+                
+                const touch = Array.from(e.changedTouches).find(t => t.identifier === touchId);
+                if (!touch) return;
+                
+                const rect = joystick.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                let dx = touch.clientX - centerX;
+                let dy = touch.clientY - centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const maxDist = 30;
+                
+                if (dist > maxDist) {
+                    dx = (dx / dist) * maxDist;
+                    dy = (dy / dist) * maxDist;
+                }
+                
+                handle.style.transform = `translate(${dx}px, ${dy}px)`;
+                
+                // Передаем управление в игру
+                if (window.brawlPlayer) {
+                    window.brawlPlayer.targetX = dx * 0.2;
+                    window.brawlPlayer.targetY = dy * 0.2;
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchend', (e) => {
+                const endedTouch = Array.from(e.changedTouches).find(t => t.identifier === touchId);
+                if (endedTouch) {
+                    joystickActive = false;
+                    touchId = null;
+                    handle.style.transform = 'translate(0, 0)';
+                    
+                    if (window.brawlPlayer) {
+                        window.brawlPlayer.targetX = 0;
+                        window.brawlPlayer.targetY = 0;
+                    }
+                }
+            });
+        }
+
+        function initBrawlAttackButtons() {
+            const attackBtn = document.getElementById('attackBtn');
+            const superBtn = document.getElementById('superBtn');
+
+            if (!attackBtn || !superBtn) return;
+
+            [attackBtn, superBtn].forEach(btn => {
+                btn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(0.9)';
+                    this.style.background = this === attackBtn ? '#c0392b' : '#8e44ad';
+                }, { passive: false });
+
+                btn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(1)';
+                    this.style.background = this === attackBtn ? '#e74c3c' : '#9b59b6';
+                    
+                    if (this === attackBtn) {
+                        brawlAttack();
+                    } else {
+                        brawlSuper();
+                    }
+                }, { passive: false });
+            });
+
+            // Обработка кликов для ПК
+            attackBtn.addEventListener('click', brawlAttack);
+            superBtn.addEventListener('click', brawlSuper);
+        }
+
+        function brawlAttack() {
+            console.log('Атака в Brawl Stars');
+            // Реализация атаки
+        }
+
+        function brawlSuper() {
+            console.log('Ультимейт в Brawl Stars');
+            // Реализация ультимейта
+        }
+
+        function initBrawlBattle() {
+            const canvas = document.getElementById('brawlCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Инициализация игрока
+            window.brawlPlayer = {
+                x: 400, y: 300, 
+                health: currentBrawler.health,
+                maxHealth: currentBrawler.health,
+                targetX: 0,
+                targetY: 0,
+                ammo: 3,
+                maxAmmo: 3,
+                speed: currentBrawler.speed,
+                size: currentBrawler.size,
+                color: currentBrawler.color
+            };
+            
+            let enemies = [];
+            let kills = 0;
+            let superReady = false;
+            let superCharge = 0;
+
+            function createEnemies() {
+                enemies = [];
+                for (let i = 0; i < 6; i++) {
+                    enemies.push({
+                        x: Math.random() * 700 + 50,
+                        y: Math.random() * 500 + 50,
+                        health: 2000,
+                        maxHealth: 2000,
+                        speed: 2,
+                        size: 35,
+                        color: '#3498db'
+                    });
+                }
+            }
+
+            function updateHUD() {
+                const healthPercent = (window.brawlPlayer.health / window.brawlPlayer.maxHealth) * 100;
+                document.getElementById('brawlHealthFill').style.width = `${healthPercent}%`;
+                document.getElementById('brawlKills').textContent = kills;
+                document.getElementById('brawlAmmo').textContent = window.brawlPlayer.ammo;
+                
+                const superBtn = document.getElementById('superBtn');
+                if (superReady) {
+                    superBtn.style.background = 'linear-gradient(45deg, #f1c40f, #f39c12)';
+                    superBtn.textContent = 'УЛЬТА!';
+                } else {
+                    superBtn.style.background = 'linear-gradient(45deg, #9b59b6, #8e44ad)';
+                    superBtn.textContent = `${Math.floor(superCharge)}%`;
+                }
+            }
+
+            function gameLoop() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Движение игрока
+                window.brawlPlayer.x += window.brawlPlayer.targetX;
+                window.brawlPlayer.y += window.brawlPlayer.targetY;
+                
+                // Ограничение движения в пределах поля
+                window.brawlPlayer.x = Math.max(window.brawlPlayer.size, Math.min(canvas.width - window.brawlPlayer.size, window.brawlPlayer.x));
+                window.brawlPlayer.y = Math.max(window.brawlPlayer.size, Math.min(canvas.height - window.brawlPlayer.size, window.brawlPlayer.y));
+                
+                // Отрисовка игрока
+                ctx.fillStyle = window.brawlPlayer.color;
+                ctx.beginPath();
+                ctx.arc(window.brawlPlayer.x, window.brawlPlayer.y, window.brawlPlayer.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.fillStyle = 'white';
+                ctx.font = '20px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(currentBrawler.icon, window.brawlPlayer.x, window.brawlPlayer.y);
+                
+                updateHUD();
+            }
+
+            createEnemies();
+            updateHUD();
+            
+            if (brawlInterval) clearInterval(brawlInterval);
+            brawlInterval = setInterval(gameLoop, 1000/60);
+        }
+
+        // ==================== FLAPPY BIRD ====================
+        let flappyInterval;
+        let flappyScore = 0;
+        let flappyBest = 0;
+        
+        function startFlappyBird() {
+            hideAllGames();
+            document.getElementById('flappyGame').style.display = 'block';
+            initFlappyBird();
+        }
+        
+        function initFlappyBird() {
+            const canvas = document.getElementById('flappyCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let bird = { x: 50, y: 150, velocity: 0 };
+            let pipes = [];
+            flappyScore = 0;
+            
+            document.getElementById('flappyScore').textContent = flappyScore;
+            document.getElementById('flappyBest').textContent = flappyBest;
+            
+            function gameLoop() {
+                bird.velocity += 0.5;
+                bird.y += bird.velocity;
+                
+                if (pipes.length === 0 || pipes[pipes.length-1].x < 200) {
+                    const gap = 120;
+                    const topHeight = 50 + Math.random() * 200;
+                    pipes.push({ x: 320, top: topHeight, bottom: topHeight + gap, passed: false });
+                }
+                
+                pipes.forEach(pipe => {
+                    pipe.x -= 2;
+                    if (pipe.x + 50 < bird.x && !pipe.passed) {
+                        pipe.passed = true;
+                        flappyScore++;
+                        document.getElementById('flappyScore').textContent = flappyScore;
+                    }
+                });
+                
+                pipes = pipes.filter(pipe => pipe.x > -50);
+                
+                if (bird.y < 0 || bird.y > 480 || 
+                    pipes.some(pipe => 
+                        bird.x + 20 > pipe.x && bird.x < pipe.x + 50 &&
+                        (bird.y < pipe.top || bird.y + 20 > pipe.bottom)
+                    )) {
+                    gameOver();
+                    return;
+                }
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#f1c40f';
+                ctx.fillRect(bird.x, bird.y, 20, 20);
+                
+                ctx.fillStyle = '#27ae60';
+                pipes.forEach(pipe => {
+                    ctx.fillRect(pipe.x, 0, 50, pipe.top);
+                    ctx.fillRect(pipe.x, pipe.bottom, 50, 480 - pipe.bottom);
+                });
+            }
+            
+            function gameOver() {
+                clearInterval(flappyInterval);
+                if (flappyScore > flappyBest) flappyBest = flappyScore;
+                alert(`Flappy Bird: Игра окончена! Очки: ${flappyScore}`);
+                backToGamesMenu();
+            }
+            
+            window.flappyJump = function() {
+                bird.velocity = -8;
+            };
+            
+            if (flappyInterval) clearInterval(flappyInterval);
+            flappyInterval = setInterval(gameLoop, 1000/60);
+        }
+
+        // ==================== ТЕТРИС ====================
+        let tetrisInterval;
+        let tetrisScore = 0;
+        let tetrisLevel = 1;
+        let tetrisLines = 0;
+        
+        function startTetris() {
+            hideAllGames();
+            document.getElementById('tetrisGame').style.display = 'block';
+            initTetris();
+        }
+        
+        function initTetris() {
+            const gridElement = document.getElementById('tetrisGrid');
+            gridElement.innerHTML = '';
+            
+            for (let i = 0; i < 200; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'tetris-cell';
+                cell.id = `tetris-cell-${i}`;
+                gridElement.appendChild(cell);
+            }
+            
+            tetrisScore = 0;
+            tetrisLevel = 1;
+            tetrisLines = 0;
+            updateTetrisUI();
+            
+            // Простая демо-версия
+            let currentY = 0;
+            
+            function gameLoop() {
+                currentY++;
+                if (currentY >= 20) currentY = 0;
+                
+                // Очистка сетки
+                for (let i = 0; i < 200; i++) {
+                    document.getElementById(`tetris-cell-${i}`).className = 'tetris-cell';
+                }
+                
+                // Отрисовка текущей фигуры
+                for (let x = 3; x < 7; x++) {
+                    const cellIndex = currentY * 10 + x;
+                    const cell = document.getElementById(`tetris-cell-${cellIndex}`);
+                    if (cell) cell.className = 'tetris-cell tetris-I';
+                }
+                
+                tetrisScore += 1;
+                updateTetrisUI();
+            }
+            
+            window.moveTetris = function(direction) {
+                // Простая реализация движения
+                alert(`Тетрис: Движение ${direction}`);
+            };
+            
+            window.rotateTetris = function() {
+                alert("Тетрис: Вращение фигуры");
+            };
+            
+            if (tetrisInterval) clearInterval(tetrisInterval);
+            tetrisInterval = setInterval(gameLoop, 500);
+        }
+        
+        function updateTetrisUI() {
+            document.getElementById('tetrisScore').textContent = tetrisScore;
+            document.getElementById('tetrisLevel').textContent = tetrisLevel;
+            document.getElementById('tetrisLines').textContent = tetrisLines;
+        }
+    </script>
+</body>
+</html>
